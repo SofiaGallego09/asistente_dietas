@@ -1,0 +1,68 @@
+{
+  "balanceada": [
+    {
+      "nombre": "Pollo con arroz integral",
+      "ingredientes": ["pollo", "arroz integral", "cebolla", "ajo", "aceite de oliva"],
+      "dieta": "balanceada"
+    },
+    {
+      "nombre": "Ensalada mixta",
+      "ingredientes": ["lechuga", "tomate", "pepino", "zanahoria", "aceite de oliva"],
+      "dieta": "balanceada"
+    },
+    {
+      "nombre": "Salmón al horno con papas",
+      "ingredientes": ["salmón", "papa", "ajo", "limón", "aceite de oliva"],
+      "dieta": "balanceada"
+    },
+    {
+      "nombre": "Pasta con verduras",
+      "ingredientes": ["pasta", "brócoli", "zanahoria", "cebolla", "aceite de oliva"],
+      "dieta": "balanceada"
+    }
+  ],
+  "vegetariana": [
+    {
+      "nombre": "Omelette de vegetales",
+      "ingredientes": ["huevo", "espinaca", "queso", "tomate"],
+      "dieta": "vegetariana"
+    },
+    {
+      "nombre": "Ensalada de lentejas",
+      "ingredientes": ["lentejas", "tomate", "cebolla", "limón"],
+      "dieta": "vegetariana"
+    },
+    {
+      "nombre": "Tacos vegetarianos",
+      "ingredientes": ["tortillas", "frijoles", "aguacate", "tomate"],
+      "dieta": "vegetariana"
+    },
+    {
+      "nombre": "Arroz con vegetales",
+      "ingredientes": ["arroz", "zanahoria", "pimentón", "cebolla"],
+      "dieta": "vegetariana"
+    }
+  ],
+  "alta_proteina": [
+    {
+      "nombre": "Carne con brócoli",
+      "ingredientes": ["carne", "brócoli", "ajo", "aceite de oliva"],
+      "dieta": "alta_proteina"
+    },
+    {
+      "nombre": "Ensalada de atún y huevo",
+      "ingredientes": ["atún", "huevo", "lechuga", "aceite de oliva"],
+      "dieta": "alta_proteina"
+    },
+    {
+      "nombre": "Pechuga a la plancha con ensalada",
+      "ingredientes": ["pollo", "lechuga", "tomate", "aceite de oliva"],
+      "dieta": "alta_proteina"
+    },
+    {
+      "nombre": "Huevos revueltos con aguacate",
+      "ingredientes": ["huevo", "aguacate", "aceite de oliva"],
+      "dieta": "alta_proteina"
+    }
+  ]
+}
