@@ -1,58 +1,142 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <title>Recetas recomendadas</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #eef2f3;
-            padding: 20px;
-        }
-        .container {
-            max-width: 700px;
-            margin: auto;
-            background: white;
-            padding: 25px;
-            border-radius: 10px;
-            box-shadow: 0 3px 10px rgba(0,0,0,0.2);
-        }
-        h1 { text-align: center; color: #2c3e50; }
-        ul { list-style-type: square; }
-        li { margin: 8px 0; }
-        a {
-            display: block;
-            margin-top: 20px;
-            text-align: center;
-            text-decoration: none;
-            background: #27ae60;
-            color: white;
-            padding: 10px;
-            border-radius: 5px;
-        }
-        a:hover { background: #219150; }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Resultados de Recetas</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --bg:#e9f7ee;
+      --card:#ffffff;
+      --ink:#0f172a;
+      --muted:#475569;
+      --pill:#f1f5f9;
+      --accent:#16a34a;
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0; font-family:Poppins,system-ui,-apple-system,Segoe UI,Roboto,Arial;
+      background: radial-gradient(1200px 600px at 20% 20%, #dff7e8 0%, #e9f7ee 40%, #e9f7ee 100%);
+      color:var(--ink);
+      padding:32px;
+    }
+    .wrap{max-width:1000px;margin:0 auto}
+    .card{
+      background:var(--card);
+      border-radius:18px;
+      box-shadow:0 10px 40px rgba(15,23,42,.08);
+      padding:28px;
+    }
+    .title{
+      display:flex; align-items:center; gap:10px; margin:0 0 18px 0;
+      font-size:clamp(20px,2.2vw,28px); line-height:1.2;
+    }
+    .muted{color:var(--muted)}
+    .meta{
+      display:grid; grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+      gap:12px; margin-bottom:22px;
+    }
+    .pill{
+      background:var(--pill); border-radius:999px; padding:10px 14px;
+      display:flex; align-items:center; gap:8px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;
+    }
+    .pill b{font-weight:600}
+    .grid{
+      display:grid; grid-template-columns: 340px 1fr; gap:22px;
+    }
+    @media (max-width:900px){ .grid{grid-template-columns:1fr} }
+    .imgwrap{
+      overflow:hidden; border-radius:14px; background:#f8fafc;
+      min-height:240px; display:flex; align-items:center; justify-content:center;
+    }
+    .imgwrap img{width:100%; height:auto; display:block}
+    .section h3{margin:0 0 10px 0; font-size:18px}
+    ul{margin:8px 0 0 18px}
+    .video{
+      margin-top:16px; border-radius:12px; overflow:hidden; background:#000;
+      aspect-ratio:16/9;
+    }
+    .badge{
+      display:inline-block; padding:6px 10px; border-radius:999px; background:#ecfeff; color:#155e75; font-size:13px; margin-right:6px;
+    }
+    .footer{
+      margin-top:22px; display:flex; gap:10px; flex-wrap:wrap; align-items:center;
+    }
+    .btn{
+      background:var(--accent); color:white; border:none; border-radius:10px; padding:10px 14px;
+      font-weight:600; cursor:pointer; text-decoration:none; display:inline-block;
+    }
+  </style>
 </head>
 <body>
-    <div class="container">
-        <h1>Hola {{ name }} 👋</h1>
-        <p><strong>Peso actual:</strong> {{ weight }} kg</p>
-        <p><strong>Objetivo:</strong> {{ goal|capitalize }} de peso</p>
-        <p><strong>Tipo de dieta sugerida:</strong> {{ diet_type.replace('_', ' ') }}</p>
-        <p><strong>Ingredientes disponibles:</strong> {{ user_ingredients | join(', ') }}</p>
+  <div class="wrap">
+    <div class="card">
+      <h1 class="title">🍽️ Receta recomendada para <span style="color:var(--accent)">{{ nombre|title }}</span></h1>
 
-        {% if recipes %}
-            <h3>Recetas recomendadas:</h3>
-            <ul>
-            {% for r in recipes %}
-                <li><strong>{{ r.nombre }}</strong> ({{ r.dieta }})</li>
+      <!-- META: siempre horizontal, sin rotaciones -->
+      <div class="info">
+  <div class="dato">🥣 <strong>Edad:</strong> {{ edad }} años</div>
+  <div class="dato">⚖️ <strong>Peso:</strong> {{ peso }} kg</div>
+  <div class="dato">🎯 <strong>Objetivo:</strong> {{ objetivo }}</div>
+  <div class="dato">🥕 <strong>Tengo:</strong> {{ ingredientes }}</div>
+</div>
+
+
+      {% if meal %}
+      <div class="grid">
+        <div>
+          <div class="imgwrap">
+            {% if meal.strMealThumb %}
+              <img src="{{ meal.strMealThumb }}" alt="{{ meal.strMeal }}">
+            {% else %}
+              <div class="muted">Sin imagen disponible</div>
+            {% endif %}
+          </div>
+        </div>
+
+        <div class="section">
+          <h3>📛 {{ meal.strMeal }}</h3>
+          <div class="muted" style="margin-bottom:10px">
+            {% if meal.strCategory %}<span class="badge">Categoría: {{ meal.strCategory }}</span>{% endif %}
+            {% if meal.strArea %}<span class="badge">Origen: {{ meal.strArea }}</span>{% endif %}
+          </div>
+
+          <h3>📝 Ingredientes</h3>
+          <ul>
+            {% for i in range(1, 21) %}
+              {% set ing = meal['strIngredient' ~ i] %}
+              {% set mea = meal['strMeasure' ~ i] %}
+              {% if ing and ing.strip() %}
+                <li>{{ ing }}{% if mea and mea.strip() %} — {{ mea }}{% endif %}</li>
+              {% endif %}
             {% endfor %}
-            </ul>
-        {% else %}
-            <p>No se encontraron recetas con esos ingredientes 😔</p>
-        {% endif %}
+          </ul>
 
-        <a href="/">Volver</a>
+          {% if meal.strInstructions %}
+            <h3 style="margin-top:14px;">📚 Instrucciones (resumen)</h3>
+            <p class="muted">{{ meal.strInstructions.split('.')[:4]|join('. ') }}.</p>
+          {% endif %}
+
+          {% if meal.strYoutube %}
+            <div class="video">
+              <iframe width="100%" height="100%" src="https://www.youtube.com/embed/{{ meal.strYoutube.split('v=')[-1] }}" title="Video receta" frameborder="0" allowfullscreen></iframe>
+            </div>
+          {% endif %}
+
+          <div class="footer">
+            <a class="btn" href="/" title="Volver">← Nueva búsqueda</a>
+            {% if meal.strSource %}<a class="btn" style="background:#0ea5e9" href="{{ meal.strSource }}" target="_blank" rel="noopener">Ver fuente</a>{% endif %}
+          </div>
+        </div>
+      </div>
+      {% else %}
+        <p class="muted">No se encontró una receta con esos ingredientes. Intenta con otros o vuelve a intentarlo.</p>
+        <a class="btn" href="/">Volver</a>
+      {% endif %}
     </div>
+  </div>
 </body>
 </html>

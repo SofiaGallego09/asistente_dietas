@@ -1,10 +1,10 @@
-from dataclasses import dataclass
+# asistente_dietas/models.py
 
-@dataclass
 class User:
-    name: str
-    age: int
-    weight: float
-    goal: str
-    diet_type: str
-    ingredients: list
+    def __init__(self, name, age, weight, goal, diet_type, ingredients):
+        self.name = name
+        self.age = age
+        self.weight = weight
+        self.goal = goal
+        self.diet_type = diet_type
+        self.ingredients = ingredients
